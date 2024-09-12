@@ -1,7 +1,12 @@
+//App.jsx
 import { useState, useEffect } from 'react'
 import './App.css'
 
+//Functions
 import fetchPokemonData from './components/PokemonData/fetchPokemonData'
+
+//Components
+import Level from './components/Level/Level'
 import ScoreBoard from './components/ScoreBoard/ScoreBoard'
 import PokemonCardContainer from './components/PokemonData/PokemonCardContainer/PokemonCardContainer'
 
@@ -23,6 +28,7 @@ function App() {
 
   const [score, setScore] = useState(0)
   const [highScore, setHighScore] = useState(0)
+  const [level, setLevel] = useState("");
 
 
 
@@ -65,12 +71,16 @@ function App() {
   return (
     <>
     <div className="main-container" >
+      <Level
+      setLevel={setLevel}
+      />
       <ScoreBoard
         score = {score}
         highScore = {highScore}
       />
       <PokemonCardContainer 
         pokemons = {pokemons}
+        level={level}
         score = {score}
         highScore = {highScore}
         setScore={setScore}
