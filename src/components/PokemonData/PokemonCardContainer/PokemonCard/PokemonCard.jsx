@@ -16,17 +16,21 @@ export default function PokemonCard({
             console.log(pokemon.name + " is in list")
             setScore(0)
             setListOfPickedPokemon([])
-            //...doesnt update parent component
             return
         }
         console.log(pokemon.name + " is newly clicked")
         //setScore(score + 1) // no
         //
         const newScore = score + 1;
-        setScore(newScore)
-        if (newScore > highScore) {
-            setHighScore(newScore)
-        }
+        setScore((prevScore)=> {
+            const newScore = prevScore +1;
+            if (newScore > highScore)
+                setHighScore(newScore)
+            return newScore;
+        })
+        //if (newScore > highScore) {
+        //    setHighScore(newScore)
+        //}
         setListOfPickedPokemon([...listOfPickedPokemon, pokemon.id])
         console.log(`score: ${newScore} , highscore: ${highScore}` ) 
     }   
