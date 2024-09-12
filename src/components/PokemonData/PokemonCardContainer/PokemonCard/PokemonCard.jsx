@@ -4,6 +4,7 @@ export default function PokemonCard({
     pokemon,
     listOfPickedPokemon,
     setListOfPickedPokemon,
+    setGameState,
     score,
     highScore,
     setScore,
@@ -16,6 +17,7 @@ export default function PokemonCard({
             console.log(pokemon.name + " is in list")
             setScore(0)
             setListOfPickedPokemon([])
+            setGameState("loose")
             return
         }
         console.log(pokemon.name + " is newly clicked")
@@ -28,9 +30,7 @@ export default function PokemonCard({
                 setHighScore(newScore)
             return newScore;
         })
-        //if (newScore > highScore) {
-        //    setHighScore(newScore)
-        //}
+      
         setListOfPickedPokemon([...listOfPickedPokemon, pokemon.id])
         console.log(`score: ${newScore} , highscore: ${highScore}` ) 
     }   

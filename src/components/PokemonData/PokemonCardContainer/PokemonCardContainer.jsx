@@ -23,8 +23,10 @@ function shuffle(array) {
 }
 
 // duplicate Key Error
-export default function PokemonCardContainer({pokemons,level,score, highScore, setScore, setHighScore  }) {
+export default function PokemonCardContainer({pokemons,level, setGameState ,score, highScore, setScore, setHighScore  }) {
     
+
+
     const [listOfPickedPokemon, setListOfPickedPokemon] = useState([])
     const [poke, setPoke] = useState([])
 
@@ -38,11 +40,21 @@ export default function PokemonCardContainer({pokemons,level,score, highScore, s
         setPoke(randoPoke(pokemons, level));
     }, [level, pokemons])
 
+    
+
 
     const NUM_DISPLAYED_CARDS = 5;
 
     const shuffledPokemons = shuffle([...poke]);
     const displayPokemons = shuffledPokemons.slice(0, NUM_DISPLAYED_CARDS)
+
+    useEffect(() => {
+        if (score > 0 && shuffledPokemons.length > 0 && score === shuffledPokemons.length) {
+          alert("You win!");
+          setGameState("won")
+        }
+      }, [score, shuffledPokemons.length]);
+      
     
     console.log("amm cards:" + shuffledPokemons.length)
     return (
@@ -51,6 +63,7 @@ export default function PokemonCardContainer({pokemons,level,score, highScore, s
                 return <PokemonCard 
                         key = {pokemon.id}
                         pokemon = {pokemon}
+                        setGameState={setGameState}
                         listOfPickedPokemon={listOfPickedPokemon}
                         setListOfPickedPokemon={setListOfPickedPokemon}
                         score = {score}

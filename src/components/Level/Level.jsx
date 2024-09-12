@@ -1,6 +1,6 @@
 // Level.jsx
 
-export default function Level({setLevel}) {
+export default function Level({setLevel, setGameState}) {
     const EASY = "easy"
     const MED = "medium"
     const HARD = "hard"
@@ -9,7 +9,9 @@ export default function Level({setLevel}) {
         return (
             <button
                 type="button"
-                onClick={()=> setLevel(level)}
+                onClick={()=> {
+                    setLevel(level)
+                    setGameState("play")}}
             >
                 {level}
             </button>

@@ -30,13 +30,15 @@ function App() {
   const [highScore, setHighScore] = useState(0)
   const [level, setLevel] = useState("");
 
+  const[gameState, setGameState] = useState("selectLevel")
+
 
 
 
 
   
-  //const pokeNames = ["mew", "bulbasaur", "ivysaur", "venusaur", "charmander", "charizard", "squirtle", "wartortle", "Blastoise", "Ekans", "Arbok", "pikachu", "Raichu", "Vulpix", "zubat", "Golbat", "oddish", "gloom", "diglett", "Meowth", "paras", "venonat", "mankey", "primeape", "psyduck", "golduck", "horsea" ]
-  const pokeNames = ["mew", "bulbasaur", "ivysaur", "venusaur", "charmander", "charizard"]
+  const pokeNames = ["mew", "bulbasaur", "ivysaur", "venusaur", "charmander", "charizard", "squirtle", "wartortle", "Blastoise", "Ekans", "Arbok", "pikachu", "Raichu", "Vulpix", "zubat", "Golbat", "oddish", "gloom", "diglett", "Meowth", "paras", "venonat", "mankey", "primeape", "psyduck", "golduck", "horsea" ]
+  //const pokeNames = ["mew", "bulbasaur", "ivysaur", "venusaur", "charmander", "charizard"]
   console.log (pokeNames.length)
   useEffect(() => {
 
@@ -64,31 +66,32 @@ function App() {
     return <p>{error}</p>;
   }
 
-
-  
-  
-
-  return (
-    <>
-    <div className="main-container" >
-      <Level
+  const mainContainer = 
+  <div className="main-container" >
+    
+    <ScoreBoard
+      score = {score}
+      highScore = {highScore}
+    />
+    <PokemonCardContainer 
+      pokemons = {pokemons}
+      level={level}
       setLevel={setLevel}
-      />
-      <ScoreBoard
-        score = {score}
-        highScore = {highScore}
-      />
-      <PokemonCardContainer 
-        pokemons = {pokemons}
-        level={level}
-        score = {score}
-        highScore = {highScore}
-        setScore={setScore}
-        setHighScore={setHighScore}
-      />
-    </div>
-  </>
-  )
+      setGameState={setGameState}
+      score = {score}
+      highScore = {highScore}
+      setScore={setScore}
+      setHighScore={setHighScore}
+    />
+  </div>
+  
+
+  const levelComp =  <Level setLevel={setLevel} setGameState={setGameState}/>
+
+  const game = gameState === "selectLevel" ? levelComp : mainContainer 
+  console.log(gameState)
+
+  return game
 }
 
 export default App
